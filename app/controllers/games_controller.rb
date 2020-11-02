@@ -10,11 +10,7 @@ class GamesController < ApplicationController
     word = params[:word].upcase
     letters = params[:letters].split(' ')
     word.each_char do |letter|
-      if letters.include?(letter)
-        letters.delete_at(letters.index(letter))
-      else
-        @message = "Sorry but #{word} cannot be built out of #{letters}"
-      end
+      letters.include?(letter) ? letters.delete_at(letters.index(letter)) : @message = "Sorry but #{word} cannot be built out of #{letters}"
     end
     unless @message
       @message = "Sorry but #{word} does not seems to be a valid English word..." unless valid_word?(word)
